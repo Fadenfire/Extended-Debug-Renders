@@ -1,0 +1,11 @@
+extended_debug_renders.debugEnabled=%1$s: shown
+extended_debug_renders.debugDisabled=%1$s: hidden
+
+key.extended_debug_renders.pathfinding=Mob Pathfinding
+key.extended_debug_renders.water=Water Levels
+key.extended_debug_renders.heightMap=Height Map
+key.extended_debug_renders.collisionBox=Block Collision Boxes
+key.extended_debug_renders.neighborsUpdate=Neighbors Update
+key.extended_debug_renders.solidFace=Solid Block Faces
+
+key.categories.extended_debug_renders=Extended Debug Renders

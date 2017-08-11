@@ -1,0 +1,15 @@
+[{
+  "modid": "extended_debug_renders",
+  "name": "Extended Debug Renders",
+  "description": "Adds keybinds to toggle a couple hidden debug features.",
+  "version": "1.0",
+  "mcversion": "1.12",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Silly511"],
+  "credits": "",
+  "logoFile": "",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}]
