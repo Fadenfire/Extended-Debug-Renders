@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 
-@Mod(name = "Extended Debug Renders", modid = "extended_debug_renders", version = "1.0")
+@Mod(name = "Extended Debug Renders", modid = "extended_debug_renders", version = "1.1", acceptableRemoteVersions = "*", clientSideOnly = true)
 @EventBusSubscriber
 public class ExtendedDebug {
 	
@@ -42,6 +42,8 @@ public class ExtendedDebug {
 	@SubscribeEvent
 	public static void onKeyInput(KeyInputEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
+		
+		if (mc.isReducedDebug()) return;
 		
 		for (int i = 0; i < all.length; i++) {
 			KeyBinding bind = all[i];
