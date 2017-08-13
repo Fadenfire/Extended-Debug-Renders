@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.5.3",
+    "package": "silly511.extendeddebug.mixin",
+    "refmap": "mixins.ExtendedDebugRenderers.refmap.json",
+    "mixins": [
+        "MixinWorldServer",
+        "MixinPathFinder"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

@@ -1,8 +1,12 @@
 package silly511.extendeddebug;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 import org.lwjgl.input.Keyboard;
+
+import com.mumfrey.liteloader.Tickable;
+import com.mumfrey.liteloader.core.LiteLoader;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.debug.DebugRenderer;
@@ -12,17 +16,8 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 
-@Mod(name = "Extended Debug Renders", modid = "extended_debug_renders", version = "1.1", acceptableRemoteVersions = "*", clientSideOnly = true)
-@EventBusSubscriber
-public class ExtendedDebug {
+public class LiteModExtendedDebug implements Tickable {
 	
 	public static KeyBinding pathfinding = new KeyBinding("key.extended_debug_renders.pathfinding", Keyboard.KEY_NONE, "key.categories.extended_debug_renders");
 	public static KeyBinding water = new KeyBinding("key.extended_debug_renders.water", Keyboard.KEY_NONE, "key.categories.extended_debug_renders");
@@ -32,15 +27,17 @@ public class ExtendedDebug {
 	public static KeyBinding solidFace = new KeyBinding("key.extended_debug_renders.solidFace", Keyboard.KEY_NONE, "key.categories.extended_debug_renders");
 	
 	public static KeyBinding[] all = new KeyBinding[] {pathfinding, water, heightMap, collisionBox, neighborsUpdate, solidFace};
-	
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
+
+
+	@Override
+	public void init(File configPath) {
 		for (KeyBinding bind : all)
-			ClientRegistry.registerKeyBinding(bind);
+			LiteLoader.getInput().registerKeyBinding(bind);
 	}
-	
-	@SubscribeEvent
-	public static void onKeyInput(KeyInputEvent event) {
+
+	@Override
+	public void onTick(Minecraft minecraft, float partialTicks, boolean inGame,
+			boolean clock) {
 		Minecraft mc = Minecraft.getMinecraft();
 		
 		if (mc.isReducedDebug()) return;
@@ -71,6 +68,20 @@ public class ExtendedDebug {
 		tag.setStyle(new Style().setColor(TextFormatting.YELLOW).setBold(true));
 		
 		return new TextComponentString("").appendSibling(tag).appendText(" ").appendSibling(message);
+	}
+
+	@Override
+	public String getVersion() {
+		return "1.12-1.2";
+	}
+
+	@Override
+	public void upgradeSettings(String version, File configPath,
+			File oldConfigPath) { }
+
+	@Override
+	public String getName() {
+		return "extended_debug_renders";
 	}
 
 }
