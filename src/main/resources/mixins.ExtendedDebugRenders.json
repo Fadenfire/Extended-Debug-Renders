@@ -4,7 +4,7 @@
     "package": "silly511.extendeddebug.mixin",
     "refmap": "mixins.ExtendedDebugRenderers.refmap.json",
     "mixins": [
-        "MixinWorldServer",
+        "MixinWorld",
         "MixinPathFinder"
     ],
     "injectors": {
