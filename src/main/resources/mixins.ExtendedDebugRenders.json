@@ -5,7 +5,9 @@
     "refmap": "mixins.ExtendedDebugRenderers.refmap.json",
     "mixins": [
         "MixinWorld",
-        "MixinPathFinder"
+        "MixinPathFinder",
+        "MixinPath",
+        "MixinPathPoint"
     ],
     "injectors": {
         "defaultRequire": 1
