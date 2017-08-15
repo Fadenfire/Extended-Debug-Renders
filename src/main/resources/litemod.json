@@ -1,0 +1,11 @@
+{
+  "name": "extended_debug_renders",
+  "displayName": "Extended Debug Renders",
+  "version": "1.12.1-1.2",
+  "author": "silly511",
+  "mcversion": "1.12.1",
+  "mixinConfigs": [
+    "mixins.ExtendedDebugRenders.json"
+  ],
+  "description": "Adds keybinds to toggle a couple hidden debug features."
+}

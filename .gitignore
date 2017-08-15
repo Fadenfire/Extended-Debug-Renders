@@ -6,3 +6,6 @@ bin
 .gradle
 .classpath
 releases
+Extended-Debug-Renders_Client.launch
+build.number
+run/
