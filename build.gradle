@@ -49,6 +49,12 @@ litemod {
     }
 }
 
+sourceSets {
+    main {
+        refMap = "mixins.ExtendedDebugRenders.refmap.json"
+    }
+}
+
 mixin {
     defaultObfuscationEnv notch
 }
