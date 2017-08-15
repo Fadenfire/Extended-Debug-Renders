@@ -22,7 +22,8 @@ import silly511.extendeddebug.ducks.WritablePath;
 public abstract class MixinPathFinder {
 	@Inject(method = "findPath(Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/entity/EntityLiving;DDDF)Lnet/minecraft/pathfinding/Path;", at = @At("RETURN"))
 	private void findPath(IBlockAccess worldIn, EntityLiving entitylivingIn, double x, double y, double z, float maxDistance, CallbackInfoReturnable<Path> cir) {
-		if (Minecraft.getMinecraft().getConnection() == null) {
+		Minecraft minecraft = Minecraft.getMinecraft();
+		if (minecraft.getConnection() == null || minecraft.world == null) {
 			return;
 		}
 
@@ -36,7 +37,7 @@ public abstract class MixinPathFinder {
 
 		SPacketCustomPayload packet = new SPacketCustomPayload("MC|DebugPath", buf);
 
-		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(Minecraft.getMinecraft().getConnection()));
+		minecraft.addScheduledTask(() -> packet.processPacket(minecraft.getConnection()));
 	}
 
 	private PacketBuffer makePacket(int eid, Path path) {

@@ -17,7 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinWorld implements IBlockAccess {
 	@Inject(method = "neighborChanged(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos;)V", at = @At("HEAD"))
 	private void onNeighborChanged(BlockPos pos, final Block blockIn, BlockPos fromPos, CallbackInfo ci) {
-		long time = Minecraft.getMinecraft().world.getTotalWorldTime();
+		Minecraft minecraft = Minecraft.getMinecraft();
+		if (minecraft.getConnection() == null || minecraft.world == null) {
+			return;
+		}
+
+		long time = minecraft.world.getTotalWorldTime();
 
 		PacketBuffer buf = new PacketBuffer(Unpooled.buffer());
 		buf.writeVarLong(time);
@@ -26,6 +31,6 @@ public abstract class MixinWorld implements IBlockAccess {
 		// This means that if this packet were to actually go over the network, it'd be invalid.
 		SPacketCustomPayload packet = new SPacketCustomPayload("MC|DebugNeighborsUpdate", buf);
 
-		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(Minecraft.getMinecraft().getConnection()));
+		minecraft.addScheduledTask(() -> packet.processPacket(minecraft.getConnection()));
 	}
 }
